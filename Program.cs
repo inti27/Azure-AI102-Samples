@@ -15,12 +15,30 @@ class Program
             //get language
             Console.WriteLine("Please select which sample to run:");
             Console.WriteLine("1 - Get Language Sample");
+            Console.WriteLine("2 - Get Language Sample Using Secure Key Vault");
+            Console.WriteLine("3 - Get Language Sample");
             string selected_option = Console.ReadLine();
             switch (int.Parse(selected_option))
             {
                 case 1:
                     {
                         new GetLanguage().RunGetLanguageSample(cogSvcEndpoint, cogSvcKey);
+                    }
+                    break;
+                case 2:
+                    {
+                        new GetLanguageSecure().RunGetLanguageSample();
+                    }
+                    break;
+                default:
+
+                    {
+                        try
+                        {
+                            throw new Exception("No such option...");
+                        }
+                        catch { }
+
                     }
                     break;
             }
