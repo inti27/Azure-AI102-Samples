@@ -10,7 +10,8 @@ namespace Azure_AI102_Samples
 {
     public class GetLanguage
     {
-        public void RunGetLanguageSample(string cogSvcEndpoint, string cogSvcKey)
+        private Helper helper = new Helper();
+        public void RunGetLanguageSample()
         {
             try
             {
@@ -27,7 +28,7 @@ namespace Azure_AI102_Samples
                     if (userText.ToLower() != "quit")
                     {
                         // Call function to detect language
-                        string language = GetLanguageAzure(userText, cogSvcEndpoint, cogSvcKey);
+                        string language = GetLanguageAzure(userText);
                         Console.WriteLine("Language: " + language);
                     }
 
@@ -38,13 +39,13 @@ namespace Azure_AI102_Samples
                 Console.WriteLine(ex.Message);
             }
         }
-        static string GetLanguageAzure(string text, string cogSvcEndpoint, string cogSvcKey)
+        public string GetLanguageAzure(string text)
         {
 
             // Create client using endpoint and key
 
-            Uri endpoint = new Uri(cogSvcEndpoint);
-            var client = new TextAnalyticsClient(endpoint, new AzureKeyCredential(cogSvcKey));
+            Uri endpoint = new Uri(helper.CognitiveServicesEndpoint);
+            var client = new TextAnalyticsClient(endpoint, new AzureKeyCredential(helper.cogSvcKey));
 
             // Call the service to get the detected language
             DetectedLanguage detectedLanguage = client.DetectLanguage(text);

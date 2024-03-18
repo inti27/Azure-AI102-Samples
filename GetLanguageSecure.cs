@@ -13,19 +13,16 @@ namespace Azure_AI102_Samples
     public class GetLanguageSecure
     {
         //Secured variables
-        private string CognitiveServicesEndpoint = "";
-        private string keyVaultName = "";
-        private string TenantId = "";
-        private string AppId = "";
-        private string AppPassword = "";
-        private string cogSvcKey;
+        private Helper helper = new Helper();
+        string cogSvcKey;
+
         public void RunGetLanguageSample()
         {
             try
             {
                 // Get Azure AI services key from keyvault using the service principal credentials
-                var keyVaultUri = new Uri($"https://{keyVaultName}.vault.azure.net/");
-                ClientSecretCredential credential = new ClientSecretCredential(TenantId, AppId, AppPassword);
+                var keyVaultUri = new Uri($"https://{helper.keyVaultName}.vault.azure.net/");
+                ClientSecretCredential credential = new ClientSecretCredential(helper.TenantId, helper.AppId, helper.AppPassword);
                 var keyVaultClient = new SecretClient(keyVaultUri, credential);
                 KeyVaultSecret secretKey = keyVaultClient.GetSecret("Cognitive-Services-Key");
                 cogSvcKey = secretKey.Value;
@@ -60,7 +57,7 @@ namespace Azure_AI102_Samples
             // Create client using endpoint and key
 
             AzureKeyCredential credentials = new AzureKeyCredential(cogSvcKey);
-            Uri endpoint = new Uri(CognitiveServicesEndpoint);
+            Uri endpoint = new Uri(helper.CognitiveServicesEndpoint);
             var client = new TextAnalyticsClient(endpoint, credentials);
 
 

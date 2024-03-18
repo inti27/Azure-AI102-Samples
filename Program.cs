@@ -6,8 +6,7 @@ using Azure_AI102_Samples;
 class Program
 {
 
-    private static string cogSvcEndpoint = "https://ai102-service.cognitiveservices.azure.com/";
-    private static string cogSvcKey = "97275da49f06440a94e406a3ac902bb1";
+
     static void Main(string[] args)
     {
         while (true)
@@ -16,31 +15,57 @@ class Program
             Console.WriteLine("Please select which sample to run:");
             Console.WriteLine("1 - Get Language Sample");
             Console.WriteLine("2 - Get Language Sample Using Secure Key Vault");
-            Console.WriteLine("3 - Get Language Sample");
+            Console.WriteLine("3 - Text Analysis Sample");
+            Console.WriteLine("4 - Speaking Clock Sample");
+            Console.WriteLine("5 - Translate Text");
+
             string selected_option = Console.ReadLine();
-            switch (int.Parse(selected_option))
+            int SelectedOption = 0;
+            if (int.TryParse(selected_option, out SelectedOption))
             {
-                case 1:
-                    {
-                        new GetLanguage().RunGetLanguageSample(cogSvcEndpoint, cogSvcKey);
-                    }
-                    break;
-                case 2:
-                    {
-                        new GetLanguageSecure().RunGetLanguageSample();
-                    }
-                    break;
-                default:
-
-                    {
-                        try
+                switch (SelectedOption)
+                {
+                    case 1:
                         {
-                            throw new Exception("No such option...");
+                            new GetLanguage().RunGetLanguageSample();
                         }
-                        catch { }
+                        break;
+                    case 2:
+                        {
+                            new GetLanguageSecure().RunGetLanguageSample();
+                        }
+                        break;
+                    case 3:
+                        {
+                            Console.WriteLine("Enter the text to analize");
+                            string text = Console.ReadLine();
+                            new TextAnalysis().RunAnalysisSample(text);
+                        }
+                        break;
+                        case 4:
+                        {
+                            new SpeakingClock().RunSpeakingClockSample();
+                        }
+                        break;
+                    case 5:
+                        {
+                            Console.WriteLine("Enter the text to translate");
+                            string text = Console.ReadLine();
+                            new TextTranslate().TranslateText(text);
+                        }
+                        break;
+                    default:
 
-                    }
-                    break;
+                        {
+                            try
+                            {
+                                throw new Exception("No such option...");
+                            }
+                            catch { }
+
+                        }
+                        break;
+                }
             }
         }
 
