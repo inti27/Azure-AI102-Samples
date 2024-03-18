@@ -13,11 +13,11 @@ namespace Azure_AI102_Samples
     public class GetLanguageSecure
     {
         //Secured variables
-        private string CognitiveServicesEndpoint = "https://ai102-service.cognitiveservices.azure.com/";
-        private string keyVaultName = "ai102bryon";
-        private string TenantId = "e05c6635-e6ae-4253-8938-1abc94c2c449";
-        private string AppId = "923505d7-0c1e-4d47-854c-f933c7fb3bd9";
-        private string AppPassword = "lMS8Q~wROO~wfVjsUyXSnypkB36qGwPMnedrHapI";
+        private string CognitiveServicesEndpoint = "";
+        private string keyVaultName = "";
+        private string TenantId = "";
+        private string AppId = "";
+        private string AppPassword = "";
         private string cogSvcKey;
         public void RunGetLanguageSample()
         {
